@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelGridApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <svg display="none" id="layer-visible-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <g id="layer-visible">
+            <path d="M12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.819-9C2.121 6.88 6.608 3 12 3zm0 16a9.005 9.005 0 0 0 8.777-7 9.005 9.005 0 0 0-17.554 0A9.005 9.005 0 0 0 12 19zm0-2.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-2a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="rgba(255,255,255,1)"/>
+        </g>
+        <g id="layer-hidden">
+            <path d="M17.882 19.297A10.949 10.949 0 0 1 12 21c-5.392 0-9.878-3.88-10.819-9a10.982 10.982 0 0 1 3.34-6.066L1.392 2.808l1.415-1.415 19.799 19.8-1.415 1.414-3.31-3.31zM5.935 7.35A8.965 8.965 0 0 0 3.223 12a9.005 9.005 0 0 0 13.201 5.838l-2.028-2.028A4.5 4.5 0 0 1 8.19 9.604L5.935 7.35zm6.979 6.978l-3.242-3.242a2.5 2.5 0 0 0 3.241 3.241zm7.893 2.264l-1.431-1.43A8.935 8.935 0 0 0 20.777 12 9.005 9.005 0 0 0 9.552 5.338L7.974 3.76C9.221 3.27 10.58 3 12 3c5.392 0 9.878 3.88 10.819 9a10.947 10.947 0 0 1-2.012 4.592zm-9.084-9.084a4.5 4.5 0 0 1 4.769 4.769l-4.77-4.769z" fill="rgba(255,255,255,1)"/>
+        </g>
+    </svg>
+
+    <div class="save-modal hide">
+        <div class="save-modal-main">
+            <div class="save-modal-options">
+                <input type="text" class="save-modal-input">
+            </div>
+            <div class="save-modal-btns">
+                <button class="save-modal-btn save-modal-btn__confirm" id="save-confirm">Save</button>
+                <button class="save-modal-btn save-modal-btn__cancel" id="save-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-header box">
+            <button class="icon-btn" id="close-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+        </div>
+        <div class="menu box">
+            <div id="size">Size: 16x16</div>
+            <button id="saveBtn">Export as PNG</button>
+        </div>
+    </div>
+
+    <div class="app-grid">
+        <div class="app-header">
+            <div class="dropdown-container" id="color-selector-container">
+                <button id="color-selector-btn"></button>
+                <div class="dropdown hide" id="color-selector-dropdown">
+                    <div class="box">
+                        <div id="color-pallete"></div>
+                        <input type="color" id="color-selector">
+                    </div>
+                </div>
+            </div>
+            <button id="pencil-btn" class="icon-btn tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12.9 6.858l4.242 4.243L7.242 21H3v-4.243l9.9-9.9zm1.414-1.414l2.121-2.122a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414l-2.122 2.121-4.242-4.242z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button id="eraser-btn" class="icon-btn tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 19h7v2h-9l-3.998.002-6.487-6.487a1 1 0 0 1 0-1.414L12.12 2.494a1 1 0 0 1 1.415 0l7.778 7.778a1 1 0 0 1 0 1.414L14 19zm1.657-4.485l3.535-3.536-6.364-6.364-3.535 3.536 6.364 6.364z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button id="eye-dropper" class="icon-btn tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.96 6.504l2.829-2.828a1 1 0 0 1 1.414 0l2.121 2.121a1 1 0 0 1 0 1.414l-2.828 2.829 1.767 1.768-1.414 1.414-7.07-7.071 1.413-1.414 1.768 1.767zM10.778 8.98l4.243 4.243L7.243 21H3v-4.243l7.778-7.778z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button id="fill-tool" class="icon-btn tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.228 18.732l1.768-1.768 1.767 1.768a2.5 2.5 0 1 1-3.535 0zM8.878 1.08l11.314 11.313a1 1 0 0 1 0 1.415l-8.485 8.485a1 1 0 0 1-1.414 0l-8.485-8.485a1 1 0 0 1 0-1.415l7.778-7.778-2.122-2.121L8.88 1.08zM11 6.03L3.929 13.1H18.07L11 6.03z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button id="mirror-btn" class="icon-btn toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><defs><path d="M15.4 17.95L12.74 17.95L12.74 15.14L18.94 8.58L21.6 11.39L15.4 17.95ZM22.04 6.24C22.22 6.44 23.63 7.93 23.82 8.12C24.06 8.37 24.06 8.79 23.82 9.06C23.72 9.15 23.28 9.62 22.48 10.46C22.21 10.18 20.09 7.92 19.82 7.64C20.62 6.81 21.06 6.33 21.15 6.24C21.4 5.98 21.8 5.98 22.04 6.24Z" id="b6YLinqJM"></path><path d="M8.6 17.95L11.26 17.95L11.26 15.14L5.06 8.58L2.4 11.39L8.6 17.95ZM1.96 6.24C1.77 6.44 0.35 7.93 0.18 8.12C-0.06 8.37 -0.06 8.79 0.18 9.06C0.27 9.15 0.72 9.62 1.51 10.46C1.77 10.18 3.9 7.92 4.17 7.64C3.38 6.81 2.92 6.33 2.84 6.24C2.6 5.98 2.2 5.98 1.96 6.24Z" id="aUCzoG0Sc"></path></defs><g><g><g><g><use xlink:href="#b6YLinqJM" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#b6YLinqJM" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#aUCzoG0Sc" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#aUCzoG0Sc" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g></g></g></g></svg>
+            </button>
+            <button id="toggle-grid-btn" class="icon-btn toggle active">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8 5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button class="icon-btn" id="clear-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-11.414L9.172 7.757 7.757 9.172 10.586 12l-2.829 2.828 1.415 1.415L12 13.414l2.828 2.829 1.415-1.415L13.414 12l2.829-2.828-1.415-1.415L12 10.586z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+            <button class="icon-btn" id="menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="rgba(255,255,255,1)"/></svg>
+            </button>
+        </div>
+        <div class="app-main"></div>
+        <div class="app-footer">
+            <div class="tab-header">
+                <div class="tab-header-left">Layers</div>
+                <div class="tab-header-right">
+                    <button class="icon-btn" id="toggleVisibilityBtn">
+                        <svg id="layer-visibility-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24">
+                            <path fill="none" d="M0 0h24v24H0z"/>
+                            <use id="layer-visibility" xlink:href="#layer-visible"></use>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="cloneLayerBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zm2 0h8v10h2V4H9v2z" fill="rgba(255,255,255,1)"/></svg>
+                    </button>
+                    <button class="icon-btn" id="moveLayerUp">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z" fill="rgba(255,255,255,1)"/></svg>
+                    </button>
+                    <button class="icon-btn" id="moveLayerDown">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" fill="rgba(255,255,255,1)"/></svg>
+                    </button>
+                    <button class="icon-btn" id="addLayer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="rgba(255,255,255,1)"/></svg>
+                    </button>
+                    <button class="icon-btn" id="removeLayer">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm-8 5v6h2v-6H9zm4 0v6h2v-6h-2zM9 4v2h6V4H9z" fill="rgba(255,255,255,1)"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="layers"></div>
+        </div>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+
+</script>
+</body>
+</html>
