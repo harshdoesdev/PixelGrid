@@ -1,0 +1,16 @@
+{
+    "name": "PixelGrid Pixel Art Editor",
+    "short_name": "PixelGrid",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#363636",
+    "theme_color": "#282828",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "/assets/logo.png",
+        "type": "image/png", "sizes": "256x256"
+      }
+    ]
+  }
+  

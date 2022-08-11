@@ -214,7 +214,7 @@ button {
 canvas#main {
     display: block;
     margin: 0;
-    background: url('./board.png');
+    background: url('./assets/board.png');
 }
 
 .bottom-toolbar {
