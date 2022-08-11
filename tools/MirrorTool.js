@@ -2,7 +2,7 @@ import { on, qs } from "../lib/dom.js";
 
 export default class MirrorTool {
 
-    toolName = 'mirror'
+    static toolName = 'mirror'
 
     active = false
 

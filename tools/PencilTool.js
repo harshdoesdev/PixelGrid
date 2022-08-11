@@ -2,7 +2,7 @@ import { on, qs } from "../lib/dom.js";
 
 export default class PencilTool {
 
-    toolName = 'pencil'
+    static toolName = 'pencil'
 
     color = null
 
@@ -14,7 +14,7 @@ export default class PencilTool {
 
         this.app.on('mousedown', ({ x, y, isDown }) => {
 
-            if(this.app.activeTool.toolName !== this.toolName) {
+            if(this.app.activeTool.constructor.toolName !== this.constructor.toolName) {
                 return;
             }
 
@@ -32,12 +32,12 @@ export default class PencilTool {
 
         const btn = qs('#pencil-btn');
 
-        on(btn, 'click', () => this.app.setTool(this.toolName));
+        on(btn, 'click', () => this.app.setTool(this.constructor.toolName));
 
         this.app.emit('setColor', '#000000');
 
         this.app.on('toolChanged', name => {
-            if(name === this.toolName) {
+            if(name === this.constructor.toolName) {
                 btn.classList.add('active');
             } else {
                 btn.classList.remove('active');

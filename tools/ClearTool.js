@@ -3,7 +3,7 @@ import EventEmitter from "../lib/EventEmitter.js";
 
 export default class ClearTool extends EventEmitter {
 
-    toolName = 'clear'
+    static toolName = 'clear'
 
     selection = null
 

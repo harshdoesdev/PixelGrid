@@ -2,7 +2,7 @@ import { on, qs } from "../lib/dom.js";
 
 export default class EyeDropperTool {
 
-    toolName = 'eye-dropper'
+    static toolName = 'eye-dropper'
 
     init(app) {
         
@@ -10,7 +10,7 @@ export default class EyeDropperTool {
 
         this.app.on('mousedown', ({ x, y, isDown }) => {
 
-            if(this.app.activeTool.toolName !== this.toolName) {
+            if(this.app.activeTool.constructor.toolName !== this.constructor.toolName) {
                 return;
             }
 
@@ -29,10 +29,10 @@ export default class EyeDropperTool {
 
         const btn = qs('#eye-dropper');
 
-        on(btn, 'click', () => this.app.setTool(this.toolName));
+        on(btn, 'click', () => this.app.setTool(this.constructor.toolName));
 
         this.app.on('toolChanged', name => {
-            if(name === this.toolName) {
+            if(name === this.constructor.toolName) {
                 btn.classList.add('active');
             } else {
                 btn.classList.remove('active');

@@ -3,7 +3,7 @@ import { debounce } from "../lib/utils.js";
 
 export default class FillTool {
 
-    toolName = 'fill-tool'
+    static toolName = 'fill-tool'
 
     init(app) {
         
@@ -23,11 +23,11 @@ export default class FillTool {
 
         this.app.on('setColor', color => this.color = color);
 
-        on(btn, 'click', () => this.app.setTool(this.toolName));
+        on(btn, 'click', () => this.app.setTool(this.constructor.toolName));
 
         this.app.on('toolChanged', name => {
 
-            if(name === this.toolName) {
+            if(name === this.constructor.toolName) {
             
                 btn.classList.add('active');
             

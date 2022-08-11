@@ -2,7 +2,7 @@ import { screenToCanvas } from "../lib/utils.js";
 
 export default class TouchHanlder {
 
-    systemName = 'touchHandler'
+    static systemName = 'touchHandler'
 
     mouse = {
         x: 0,
@@ -10,14 +10,7 @@ export default class TouchHanlder {
         isDown: false
     }
 
-    init(app) {
-        this.app = app;
-        this.app.on('pointerdown', this.handleTouch.bind(this));
-        this.app.on('pointerup', this.handleTouch.bind(this));
-        this.app.on('pointermove', this.handleTouch.bind(this));
-    }
-
-    handleTouch(e) {
+    handleTouch = (e) => {
 
         const type = e.type;
         
@@ -48,6 +41,13 @@ export default class TouchHanlder {
 
         }
 
+    }
+
+    init(app) {
+        this.app = app;
+        this.app.on('pointerdown', this.handleTouch);
+        this.app.on('pointerup', this.handleTouch);
+        this.app.on('pointermove', this.handleTouch);
     }
 
 }

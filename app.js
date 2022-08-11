@@ -40,6 +40,10 @@ const initApp = () => {
 
     const closeMenuBtn = qs('#close-menu');
 
+    const addColorBtn = qs('#add-color-btn');
+
+    const colorPallet = qs('#color-selector');
+
     const menu = qs('.menu-container');
 
     on(menuBtn, 'click', () => {
@@ -51,6 +55,12 @@ const initApp = () => {
     on(closeMenuBtn, 'click', () => {
 
         menu.classList.remove('show');
+
+    });
+
+    on(addColorBtn, 'click', () => {
+
+        colorPallet.click();
 
     });
 

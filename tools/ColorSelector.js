@@ -2,7 +2,7 @@ import { on, qs } from "../lib/dom.js";
 
 export default class ColorSelector {
 
-    toolName = 'color-selector'
+    static toolName = 'color-selector'
 
     colors = new Set
 

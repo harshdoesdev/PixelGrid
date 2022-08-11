@@ -215,6 +215,7 @@ canvas#main {
     display: block;
     margin: 0;
     background: url('./assets/board.png');
+    touch-action: none;
 }
 
 .bottom-toolbar {

@@ -2,7 +2,7 @@ import { on, qs } from "../lib/dom.js";
 
 export default class EraserTool {
 
-    toolName = 'eraser'
+    static toolName = 'eraser'
 
     mirror = false
 
@@ -12,7 +12,7 @@ export default class EraserTool {
 
         this.app.on('mousedown', ({ x, y, isDown }) => {
 
-            if(this.app.activeTool.toolName !== this.toolName) {
+            if(this.app.activeTool.constructor.toolName !== this.constructor.toolName) {
                 return;
             }
 
@@ -28,10 +28,10 @@ export default class EraserTool {
 
         const btn = qs('#eraser-btn');
 
-        on(btn, 'click', () => this.app.setTool(this.toolName));
+        on(btn, 'click', () => this.app.setTool(this.constructor.toolName));
 
         this.app.on('toolChanged', name => {
-            if(name === this.toolName) {
+            if(name === this.constructor.toolName) {
                 btn.classList.add('active');
             } else {
                 btn.classList.remove('active');
