@@ -1,7 +1,7 @@
 # PixelGrid
 A Simple Pixel Art Editor
 
-[[Live Demo]](https://pixelgrid.surge.sh)
+[[Live Demo]](https://pixel-grid-app.surge.sh)
 
 ## Usage
 Clone this folder and then start a html server in the root directory of the project.
